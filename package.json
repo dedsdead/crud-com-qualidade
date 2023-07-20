@@ -4,13 +4,21 @@
   "description": "Criando um CRUD com qualidade",
   "main": "crud.js",
   "scripts": {
-    "start": "node ./crud.js",
-    "dev": "nodemon ./crud.js",
+    "start": "node ./core/crud.js",
+    "dev": "nodemon ./core/crud.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dedsdead/crud-com-qualidade.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dedsdead/crud-com-qualidade/issues"
+  },
+  "homepage": "https://github.com/dedsdead/crud-com-qualidade#readme",
   "devDependencies": {
     "nodemon": "^3.0.1"
   }

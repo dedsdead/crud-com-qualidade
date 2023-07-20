@@ -11,4 +11,4 @@ function createTweet(content) {
 
 // [SIMULATION]
 
-console.log(createTweet("Bora crudar com qualidade!!!"));
+console.log(createTweet("Bora crudar com qualidade!"));
