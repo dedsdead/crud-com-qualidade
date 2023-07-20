@@ -1,1 +1,14 @@
-Bora crudar com qualidade!
+{
+  "todos": [
+    {
+      "content": "Primeira TODO",
+      "date": "2023-07-20T16:05:09.167Z",
+      "done": false
+    },
+    {
+      "content": "Segunda TODO",
+      "date": "2023-07-20T16:05:09.167Z",
+      "done": false
+    }
+  ]
+}
