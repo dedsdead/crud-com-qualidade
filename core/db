@@ -1,1 +1,25 @@
-Bora crudar com qualidade!
+{
+  "todos": [
+    {
+      "id": "5890fc27-3f8b-4c59-bf99-9be9e4ee230f",
+      "content": "Primeira TODO",
+      "date": "2023-07-20T19:07:53.769Z",
+      "done": false,
+      "deleted": true
+    },
+    {
+      "id": "264b9faf-dc3c-49ef-b6ce-d3a54eedb5ff",
+      "content": "Segunda TODO modificada!",
+      "date": "2023-07-20T19:07:53.770Z",
+      "done": false,
+      "deleted": false
+    },
+    {
+      "id": "facab87f-d086-4139-97a9-37ce0e6b670e",
+      "content": "Terceira TODO",
+      "date": "2023-07-20T19:07:53.771Z",
+      "done": false,
+      "deleted": false
+    }
+  ]
+}
