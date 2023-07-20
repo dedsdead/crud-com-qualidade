@@ -1,0 +1,17 @@
+{
+  "name": "core",
+  "version": "1.0.0",
+  "description": "Criando um CRUD com qualidade",
+  "main": "crud.js",
+  "scripts": {
+    "start": "node ./crud.js",
+    "dev": "nodemon ./crud.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
