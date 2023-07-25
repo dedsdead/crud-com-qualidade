@@ -1,11 +1,16 @@
 {
-  "name": "core",
+  "name": "crud-com-qualidade",
   "version": "1.0.0",
   "description": "Criando um CRUD com qualidade",
   "main": "crud.js",
   "scripts": {
     "start:crud": "npx ts-node ./core/crud.ts",
     "dev:crud": "nodemon --ext ts,tsx --exec npm run start:crud",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint \"./**/*.{jsx,jsx,ts,tsx}\"",
+    "lint:fix": "npm run lint -- --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,11 +26,26 @@
   "homepage": "https://github.com/dedsdead/crud-com-qualidade#readme",
   "devDependencies": {
     "@types/node": "^20.4.2",
+    "@types/react": "18.2.15",
     "@types/uuid": "^9.0.2",
-    "nodemon": "^3.0.1"
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "cypress": "^12.17.2",
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.32.2",
+    "nodemon": "^3.0.1",
+    "prettier": "^2.8.7"
   },
   "dependencies": {
+    "next": "^13.4.10",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "typescript": "^5.1.6",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "zod": "^3.21.4"
   }
 }

@@ -1,24 +1,31 @@
 {
   "todos": [
     {
-      "id": "5890fc27-3f8b-4c59-bf99-9be9e4ee230f",
-      "content": "Primeira TODO",
-      "date": "2023-07-20T19:07:53.769Z",
-      "done": false,
-      "deleted": true
-    },
-    {
-      "id": "264b9faf-dc3c-49ef-b6ce-d3a54eedb5ff",
-      "content": "Segunda TODO modificada!",
-      "date": "2023-07-20T19:07:53.770Z",
+      "id": "80c096c5-da7f-45dd-b6b2-b1f9d0eb374c",
+      "content": "zerinha todo",
+      "date": "2023-07-23T22:16:01.044Z",
       "done": false,
       "deleted": false
     },
     {
-      "id": "facab87f-d086-4139-97a9-37ce0e6b670e",
-      "content": "Terceira TODO",
-      "date": "2023-07-20T19:07:53.771Z",
+      "id": "7490e262-581b-49d4-b2ef-ccf4e6db777b",
+      "content": "todo deletada",
+      "date": "2023-07-23T22:14:55.890Z",
       "done": false,
+      "deleted": true
+    },
+    {
+      "id": "22a31d16-6c15-49ab-840d-7156c076e8ec",
+      "content": "mais uma todo",
+      "date": "2023-07-23T22:14:51.635Z",
+      "done": false,
+      "deleted": false
+    },
+    {
+      "id": "b7947e3f-f686-4fae-b5ed-b77194be904a",
+      "content": "nova todo",
+      "date": "2023-07-23T22:12:43.148Z",
+      "done": true,
       "deleted": false
     }
   ]

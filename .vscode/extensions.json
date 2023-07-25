@@ -1,5 +1,7 @@
 {
     "recommendations": [
-        "wallabyjs.quokka-vscode"
+        "wallabyjs.quokka-vscode",
+        "dbaeumer.vscode-eslint",
+        "editorconfig.editorconfig"
     ]
 }
