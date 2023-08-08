@@ -11,6 +11,8 @@ jobs:
             ## [Common CI Steps]
             - uses: actions/checkout@v3
             ## ====================
+            - name: "Install Dependencies"
+              run: "npm ci"
             - name: "Debug"
               run: "ls -la"
             - name: "Lint"
