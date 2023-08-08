@@ -1,6 +1,6 @@
 name: "[CI] Continuous Integration"
 
-#sempre que tiver um commit ou um PR for aberto
+#sempre que tiver um commit ou um PR for aberto TESTE
 on:
     pull_request: 
         types: [opened, synchronize]
