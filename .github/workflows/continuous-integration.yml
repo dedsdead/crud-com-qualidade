@@ -4,6 +4,7 @@ name: "[CI] Continuous Integration"
 on:
     pull_request: 
         types: [opened, synchronize]
+
 jobs:
     lint:
         runs-on: ubuntu-latest
@@ -11,9 +12,9 @@ jobs:
             ## [Common CI Steps]
             - uses: actions/checkout@v3
             ## ====================
-            - name: "Install Dependencies"
-              run: "npm install"
             - name: "Debug"
               run: "ls -la"
+            - name: "Install Dependencies"
+              run: "npm install"
             - name: "Lint"
               run: "npm run lint"
