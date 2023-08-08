@@ -1,8 +1,8 @@
-import { todoController } from "@ui/controller/todo";
-import { GlobalStyles } from "@ui/theme/GlobalStyles";
-import React from "react";
+import { todoController } from '@ui/controller/todo';
+import { GlobalStyles } from '@ui/theme/GlobalStyles';
+import React from 'react';
 
-const bg = "https://mariosouto.com/cursos/crudcomqualidade/bg";
+const bg = 'https://mariosouto.com/cursos/crudcomqualidade/bg';
 // const bg = "/imageName.jpeg"; load the image inside public folder
 
 interface HomeTodo {
@@ -17,8 +17,8 @@ export default function Page() {
     const [pages, setPages] = React.useState(0);
     const [page, setPage] = React.useState(1);
     const [todos, setTodos] = React.useState<HomeTodo[]>([]);
-    const [newTodoContent, setNewTodoContent] = React.useState<string>("");
-    const [search, setSearch] = React.useState<string>("");
+    const [newTodoContent, setNewTodoContent] = React.useState<string>('');
+    const [search, setSearch] = React.useState<string>('');
     const filteredTodos = todoController.filterTodosByContent<HomeTodo>(
         search,
         todos
@@ -60,7 +60,7 @@ export default function Page() {
                             onError(customMessage) {
                                 alert(
                                     customMessage ||
-                                        "Você precisa inserir um conteúdo"
+                                        'Você precisa inserir um conteúdo'
                                 );
                             },
                             onSuccess() {
@@ -71,7 +71,7 @@ export default function Page() {
                                         setTodos(todos);
                                         setPages(pages);
                                     });
-                                setNewTodoContent("");
+                                setNewTodoContent('');
                             },
                         });
                     }}
@@ -186,7 +186,7 @@ export default function Page() {
                                 <td
                                     colSpan={4}
                                     align="center"
-                                    style={{ textAlign: "center" }}
+                                    style={{ textAlign: 'center' }}
                                 >
                                     Carregando...
                                 </td>
@@ -206,7 +206,7 @@ export default function Page() {
                                 <td
                                     colSpan={4}
                                     align="center"
-                                    style={{ textAlign: "center" }}
+                                    style={{ textAlign: 'center' }}
                                 >
                                     <button
                                         data-type="load-more"
@@ -230,12 +230,12 @@ export default function Page() {
                                                 });
                                         }}
                                     >
-                                        Página {page}, Carregar mais{" "}
+                                        Página {page}, Carregar mais{' '}
                                         <span
                                             style={{
-                                                display: "inline-block",
-                                                marginLeft: "4px",
-                                                fontSize: "1.2em",
+                                                display: 'inline-block',
+                                                marginLeft: '4px',
+                                                fontSize: '1.2em',
                                             }}
                                         >
                                             ↓

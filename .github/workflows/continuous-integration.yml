@@ -16,4 +16,4 @@ jobs:
             - name: "Debug"
               run: "ls -la"
             - name: "Lint"
-              run: "npm run lint --fix"
+              run: "npm run lint"

@@ -1,20 +1,20 @@
-import { todoController } from "@server/controller/todo";
-import { NextApiRequest, NextApiResponse } from "next";
+import { todoController } from '@server/controller/todo';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-    if (req.method === "GET") {
+    if (req.method === 'GET') {
         todoController.get(req, res);
         return;
     }
 
-    if (req.method === "POST") {
+    if (req.method === 'POST') {
         todoController.create(req, res);
         return;
     }
 
     res.status(405).json({
         error: {
-            message: "Method not allowed",
+            message: 'Method not allowed',
         },
     });
 }

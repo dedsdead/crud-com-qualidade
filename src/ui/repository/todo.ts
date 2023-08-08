@@ -1,5 +1,5 @@
-import { z as schema } from "zod";
-import { Todo, TodoSchema } from "@ui/schema/todo";
+import { z as schema } from 'zod';
+import { Todo, TodoSchema } from '@ui/schema/todo';
 
 interface TodoRepositoryGetParams {
     page: number;
@@ -36,18 +36,18 @@ function parseTodosServer(responseBody: unknown): {
 } {
     if (
         responseBody !== null &&
-        typeof responseBody === "object" &&
-        "todos" in responseBody &&
-        "total" in responseBody &&
-        "pages" in responseBody &&
+        typeof responseBody === 'object' &&
+        'todos' in responseBody &&
+        'total' in responseBody &&
+        'pages' in responseBody &&
         Array.isArray(responseBody.todos)
     ) {
         return {
             total: Number(responseBody.total),
             pages: Number(responseBody.pages),
             todos: responseBody.todos.map((todo: unknown) => {
-                if (todo === null && typeof todo !== "object") {
-                    throw new Error("Invalid todo from API");
+                if (todo === null && typeof todo !== 'object') {
+                    throw new Error('Invalid todo from API');
                 }
                 const { id, content, date, done } = todo as {
                     id: string;
@@ -59,7 +59,7 @@ function parseTodosServer(responseBody: unknown): {
                     id,
                     content,
                     date: date,
-                    done: String(done).toLowerCase() === "true",
+                    done: String(done).toLowerCase() === 'true',
                 };
             }),
         };
@@ -73,10 +73,10 @@ function parseTodosServer(responseBody: unknown): {
 }
 
 async function create(content: string): Promise<Todo> {
-    return fetch("http://localhost:3000/api/todos", {
-        method: "POST",
+    return fetch('http://localhost:3000/api/todos', {
+        method: 'POST',
         headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify({
             content,
@@ -88,7 +88,7 @@ async function create(content: string): Promise<Todo> {
         });
         const todoParsed = todoSchema.safeParse(todoResponse);
         if (!todoParsed.success) {
-            throw new Error("Invalid todo from API");
+            throw new Error('Invalid todo from API');
         }
 
         return todoParsed.data.todo;
@@ -97,9 +97,9 @@ async function create(content: string): Promise<Todo> {
 
 async function toggleDone(todoId: string): Promise<Todo> {
     return fetch(`http://localhost:3000/api/todos/${todoId}/toggle-done`, {
-        method: "PUT",
+        method: 'PUT',
         headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
         },
     }).then(async (resp) => {
         const todoResponse = await resp.json();
@@ -108,7 +108,7 @@ async function toggleDone(todoId: string): Promise<Todo> {
         });
         const todoParsed = todoSchema.safeParse(todoResponse);
         if (!todoParsed.success) {
-            throw new Error("Invalid todo from API");
+            throw new Error('Invalid todo from API');
         }
         return todoParsed.data.todo;
     });
@@ -116,9 +116,9 @@ async function toggleDone(todoId: string): Promise<Todo> {
 
 async function deleteById(todoId: string) {
     return fetch(`http://localhost:3000/api/todos/${todoId}`, {
-        method: "DELETE",
+        method: 'DELETE',
         headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
         },
     });
 }

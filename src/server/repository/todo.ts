@@ -1,5 +1,5 @@
-import { createTodo, readTodos, updateTodo } from "@db-crud-todo";
-import { HttpNotFoundError } from "@server/infra/errors";
+import { createTodo, readTodos, updateTodo } from '@db-crud-todo';
+import { HttpNotFoundError } from '@server/infra/errors';
 
 interface Todo {
     id: string;

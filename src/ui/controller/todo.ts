@@ -1,5 +1,5 @@
-import { todoRepository } from "@ui/repository/todo";
-import { z as schema } from "zod";
+import { todoRepository } from '@ui/repository/todo';
+import { z as schema } from 'zod';
 
 interface TodoControllerGetParams {
     page: number;
@@ -49,7 +49,7 @@ function toggleDone({
 }: TodoControllerToggleDoneParams) {
     const parsedParams = schema.string().nonempty().safeParse(id);
     if (!parsedParams.success) {
-        throw new Error("Invalid ID");
+        throw new Error('Invalid ID');
     }
     todoRepository
         .toggleDone(parsedParams.data)
@@ -64,7 +64,7 @@ function toggleDone({
 function deleteById(id: string) {
     const parsedParams = schema.string().nonempty().safeParse(id);
     if (!parsedParams.success) {
-        throw new Error("Invalid ID");
+        throw new Error('Invalid ID');
     }
     todoRepository.deleteById(parsedParams.data);
 }

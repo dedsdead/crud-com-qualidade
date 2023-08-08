@@ -1,4 +1,4 @@
-import { z as schema } from "zod";
+import { z as schema } from 'zod';
 
 export const TodoSchema = schema.object({
     id: schema.string().uuid(),

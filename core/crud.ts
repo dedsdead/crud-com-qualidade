@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
-import fs from "fs"; //ES6
-import { v4 as uuid } from "uuid";
+import fs from 'fs'; //ES6
+import { v4 as uuid } from 'uuid';
 
-const DB_FILEPATH = "./core/db";
+const DB_FILEPATH = './core/db';
 
 type UUID = string;
 
@@ -39,7 +39,7 @@ export function createTodo(content: string): Todo {
         done: false,
         deleted: false,
     };
-    Object.defineProperty(todo, "id", {
+    Object.defineProperty(todo, 'id', {
         writable: false,
     });
 
@@ -49,8 +49,8 @@ export function createTodo(content: string): Todo {
 }
 
 export function readTodos(): Array<Todo> {
-    const dbString = fs.readFileSync(DB_FILEPATH, "utf-8");
-    const db = JSON.parse(dbString || "{}");
+    const dbString = fs.readFileSync(DB_FILEPATH, 'utf-8');
+    const db = JSON.parse(dbString || '{}');
     if (!db.todos) {
         return [];
     }
@@ -70,7 +70,7 @@ export function updateTodo(id: UUID, partialTodo: Partial<Todo>): Todo {
     });
 
     if (!modifiedTodo) {
-        throw new Error("Invalid ID entry!");
+        throw new Error('Invalid ID entry!');
     }
 
     writeTodos();

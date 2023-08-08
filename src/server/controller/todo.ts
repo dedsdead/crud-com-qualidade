@@ -1,7 +1,7 @@
-import { HttpNotFoundError } from "@server/infra/errors";
-import { todoRepository } from "@server/repository/todo";
-import { NextApiRequest, NextApiResponse } from "next";
-import { z as schema } from "zod";
+import { HttpNotFoundError } from '@server/infra/errors';
+import { todoRepository } from '@server/repository/todo';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { z as schema } from 'zod';
 
 const createTodoBodySchema = schema.object({
     content: schema.string(),
@@ -19,14 +19,14 @@ async function get(req: NextApiRequest, res: NextApiResponse) {
 
     if (query.page && isNaN(page)) {
         res.status(400).json({
-            error: { message: "Page must be a numer" },
+            error: { message: 'Page must be a numer' },
         });
         return;
     }
 
     if (query.limit && isNaN(limit)) {
         res.status(400).json({
-            error: { message: "Limit must be a numer" },
+            error: { message: 'Limit must be a numer' },
         });
         return;
     }
@@ -47,7 +47,7 @@ async function create(req: NextApiRequest, res: NextApiResponse) {
     if (!body.success) {
         res.status(400).json({
             error: {
-                message: "You need to provide a valid content",
+                message: 'You need to provide a valid content',
                 description: body.error.issues,
             },
         });
@@ -65,7 +65,7 @@ async function deleteById(req: NextApiRequest, res: NextApiResponse) {
     if (!query.success) {
         return res.status(400).json({
             error: {
-                message: "You must provide a valid ID",
+                message: 'You must provide a valid ID',
                 description: query.error.issues,
             },
         });
@@ -84,7 +84,7 @@ async function deleteById(req: NextApiRequest, res: NextApiResponse) {
 
         res.status(500).json({
             error: {
-                message: "Internal server error",
+                message: 'Internal server error',
             },
         });
     }
@@ -95,7 +95,7 @@ async function toggleDone(req: NextApiRequest, res: NextApiResponse) {
     if (!query.success) {
         return res.status(400).json({
             error: {
-                message: "You must provide a valid ID",
+                message: 'You must provide a valid ID',
                 description: query.error.issues,
             },
         });
@@ -117,7 +117,7 @@ async function toggleDone(req: NextApiRequest, res: NextApiResponse) {
 
         res.status(500).json({
             error: {
-                message: "Internal server error",
+                message: 'Internal server error',
             },
         });
     }
