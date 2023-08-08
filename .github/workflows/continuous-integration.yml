@@ -25,5 +25,5 @@ jobs:
       ## ====================
       - name: "Install Dependencies"
         run: "npm install"
-      - name: "Test"
+      - name: "Test - Cypress"
         run: "npm run test"

@@ -10,7 +10,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint \"./**/*.{jsx,jsx,ts,tsx}\"",
-    "lint:fix": "npm run lint -- --fix",
+    "lint:fix": "npm run lint",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "test": "concurrently -g -s first -k \"npm run dev\" \"npm run cy:run\""
