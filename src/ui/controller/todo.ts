@@ -33,12 +33,14 @@ async function create({
         onError();
         return;
     }
-    try {
-        await todoRepository.create(parsedParams.data);
-        onSuccess();
-    } catch (error) {
-        onError("Erro ao criar a todo");
-    }
+    todoRepository
+        .create(parsedParams.data)
+        .then(() => {
+            onSuccess();
+        })
+        .catch(() => {
+            onError();
+        });
 }
 
 function toggleDone({
