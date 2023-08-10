@@ -20,7 +20,7 @@ async function get({
   const currentLimit = limit || 10;
   const startIndex = (currentPage - 1) * currentLimit;
   const endIndex = currentPage * currentLimit - 1;
-  const { data, count, error } = await supabase
+  const { data, count, error } = await supabase()
     .from('todos')
     .select('*', { count: 'exact' })
     .eq('deleted', false)
@@ -46,7 +46,7 @@ async function get({
 }
 
 async function getTodoById(id: string): Promise<Todo> {
-  const { data, error } = await supabase
+  const { data, error } = await supabase()
     .from('todos')
     .select()
     .eq('id', id)
@@ -61,7 +61,7 @@ async function getTodoById(id: string): Promise<Todo> {
 }
 
 async function createByContent(content: string): Promise<Todo> {
-  const { data, error } = await supabase
+  const { data, error } = await supabase()
     .from('todos')
     .insert({ content: content })
     .select()
@@ -76,7 +76,7 @@ async function createByContent(content: string): Promise<Todo> {
 async function deleteById(id: string) {
   const todo = await getTodoById(id);
 
-  const { error } = await supabase
+  const { error } = await supabase()
     .from('todos')
     .update({ deleted: true })
     .eq('id', todo.id);
@@ -89,7 +89,7 @@ async function deleteById(id: string) {
 async function toggleDone(id: string): Promise<Todo> {
   const todo = await getTodoById(id);
 
-  const { data, error } = await supabase
+  const { data, error } = await supabase()
     .from('todos')
     .update({ done: !todo.done })
     .eq('id', todo.id)

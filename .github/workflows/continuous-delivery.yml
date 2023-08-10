@@ -1,13 +1,8 @@
 name: "[CD] Continuous Delivery"
 
-# Sempre que tiver um commit ou um PR for aberto
-# on:
-#   push:
-#     branches: [ main ]
-
 on:
-    pull_request: 
-        types: [opened, synchronize]
+  push:
+    branches: [ main ]
 
 env:
   VERCEL_ORG_ID: nTXDm1SCWcmEzztU51MMCELp
