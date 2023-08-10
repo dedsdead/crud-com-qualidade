@@ -30,16 +30,22 @@ async function get(req: NextApiRequest, res: NextApiResponse) {
     });
     return;
   }
-
-  const serverOutput = await todoRepository.get({
-    page,
-    limit,
-  });
-  res.status(200).json({
-    total: serverOutput.totalTodos,
-    pages: serverOutput.pages,
-    todos: serverOutput.todos,
-  });
+  try {
+    const serverOutput = await todoRepository.get({
+      page,
+      limit,
+    });
+    res.status(200).json({
+      total: serverOutput.totalTodos,
+      pages: serverOutput.pages,
+      todos: serverOutput.todos,
+    });
+  } catch (error) {
+    res.status(400).json({
+      error: { message: 'Failed to fetch TODOs' },
+    });
+    return;
+  }
 }
 
 async function create(req: NextApiRequest, res: NextApiResponse) {
