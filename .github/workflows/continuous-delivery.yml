@@ -19,4 +19,4 @@ jobs:
       - name: "Install Dependencies"
         run: "npm install"
       - name: "Vercel"
-        run: "npx vercel --prod"
+        run: "npx -vercel --prod --token=GmSKphBbCdZswHY2q4klb2dj"
