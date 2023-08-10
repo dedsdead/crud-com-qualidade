@@ -9,6 +9,10 @@ on:
     pull_request: 
         types: [opened, synchronize]
 
+env:
+  VERCEL_ORG_ID: nTXDm1SCWcmEzztU51MMCELp
+  VERCEL_PROJECT_ID: prj_7vWfJcuTDwfuDuimKztN1YSqxImp
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -19,4 +23,4 @@ jobs:
       - name: "Install Dependencies"
         run: "npm install"
       - name: "Vercel"
-        run: "npx -vercel --prod --token=GmSKphBbCdZswHY2q4klb2dj"
+        run: "npx -vercel --prod --token=${{ secrets.VERCEL_TOKEN }}"
