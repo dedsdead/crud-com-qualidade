@@ -52,7 +52,7 @@ function parseTodosServer(responseBody: unknown): {
         const { id, content, date, done } = todo as {
           id: string;
           content: string;
-          date: string;
+          date: Date;
           done: string;
         };
         return {

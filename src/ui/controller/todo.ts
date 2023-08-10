@@ -16,6 +16,11 @@ interface TodoControllerToggleDoneParams {
   updateTodosOnScreen: () => void;
 }
 
+interface TodoControllerDeleteParams {
+  id?: string;
+  onSuccess: () => void;
+}
+
 async function get(params: TodoControllerGetParams) {
   return todoRepository.get({
     page: params.page,
@@ -61,12 +66,19 @@ function toggleDone({
     });
 }
 
-function deleteById(id: string) {
+async function deleteById({ id, onSuccess }: TodoControllerDeleteParams) {
   const parsedParams = schema.string().nonempty().safeParse(id);
   if (!parsedParams.success) {
     throw new Error('Invalid ID');
   }
-  todoRepository.deleteById(parsedParams.data);
+  todoRepository
+    .deleteById(parsedParams.data)
+    .then(() => {
+      onSuccess();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
 
 function filterTodosByContent<Todo>(
