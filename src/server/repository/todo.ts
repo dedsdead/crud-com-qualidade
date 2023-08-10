@@ -20,29 +20,33 @@ async function get({
   const currentLimit = limit || 10;
   const startIndex = (currentPage - 1) * currentLimit;
   const endIndex = currentPage * currentLimit - 1;
-  const { data, count, error } = await supabase()
-    .from('todos')
-    .select('*', { count: 'exact' })
-    .eq('deleted', false)
-    .order('date', { ascending: false })
-    .range(startIndex, endIndex);
-  if (error) throw new Error('Failed to fetch data');
 
-  const parsedData = TodoSchema.array().safeParse(data);
+  try {
+    const { data, count } = await supabase()
+      .from('todos')
+      .select('*', { count: 'exact' })
+      .eq('deleted', false)
+      .order('date', { ascending: false })
+      .range(startIndex, endIndex);
 
-  if (!parsedData.success) {
-    throw parsedData.error;
+    const parsedData = TodoSchema.array().safeParse(data);
+
+    if (!parsedData.success) {
+      throw parsedData.error;
+    }
+
+    const todos = parsedData.data;
+    const totalTodos = count || todos.length;
+    const pages = Math.ceil(totalTodos / currentLimit);
+
+    return {
+      todos,
+      totalTodos,
+      pages,
+    };
+  } catch (error) {
+    throw new Error('Failed to fetch data');
   }
-
-  const todos = parsedData.data;
-  const totalTodos = count || todos.length;
-  const pages = Math.ceil(totalTodos / currentLimit);
-
-  return {
-    todos,
-    totalTodos,
-    pages,
-  };
 }
 
 async function getTodoById(id: string): Promise<Todo> {
