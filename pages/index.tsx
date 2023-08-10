@@ -147,14 +147,18 @@ export default function Page() {
                     <button
                       data-type="delete"
                       onClick={() => {
-                        todoController.deleteById(todo.id);
-                        setPage(1);
-                        todoController
-                          .get({ page: 1 })
-                          .then(({ todos, pages }) => {
-                            setTodos(todos);
-                            setPages(pages);
-                          });
+                        todoController.deleteById({
+                          id: todo.id,
+                          onSuccess() {
+                            setPage(1);
+                            todoController
+                              .get({ page: 1 })
+                              .then(({ todos, pages }) => {
+                                setTodos(todos);
+                                setPages(pages);
+                              });
+                          },
+                        });
                       }}
                     >
                       Apagar

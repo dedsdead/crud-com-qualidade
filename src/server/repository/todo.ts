@@ -1,12 +1,5 @@
-import { createTodo, readTodos, updateTodo } from '@db-crud-todo';
-import { HttpNotFoundError } from '@server/infra/errors';
-
-interface Todo {
-  id: string;
-  content: string;
-  date: string;
-  done: boolean;
-}
+import { Todo, TodoSchema } from '@server/schema/todo';
+import { supabase } from '@server/infra/db/supabase';
 
 interface TodoRepositoryGetParams {
   page?: number;
@@ -19,59 +12,94 @@ interface TodoRepositoryGetOutput {
   pages: number;
 }
 
-function get({
+async function get({
   page,
   limit,
-}: TodoRepositoryGetParams = {}): TodoRepositoryGetOutput {
+}: TodoRepositoryGetParams = {}): Promise<TodoRepositoryGetOutput> {
   const currentPage = page || 1;
   const currentLimit = limit || 10;
-  const allTodos = readTodos();
   const startIndex = (currentPage - 1) * currentLimit;
-  const endIndex = currentPage * currentLimit;
-  const paginatedTodos = allTodos.slice(startIndex, endIndex);
-  const totalPages = Math.ceil(allTodos.length / currentLimit);
+  const endIndex = currentPage * currentLimit - 1;
+  const { data, count, error } = await supabase
+    .from('todos')
+    .select('*', { count: 'exact' })
+    .eq('deleted', false)
+    .order('date', { ascending: false })
+    .range(startIndex, endIndex);
+  if (error) throw new Error('Failed to fetch data');
+
+  const parsedData = TodoSchema.array().safeParse(data);
+
+  if (!parsedData.success) {
+    throw parsedData.error;
+  }
+
+  const todos = parsedData.data;
+  const totalTodos = count || todos.length;
+  const pages = Math.ceil(totalTodos / currentLimit);
+
   return {
-    totalTodos: allTodos.length,
-    todos: paginatedTodos,
-    pages: totalPages,
+    todos,
+    totalTodos,
+    pages,
   };
 }
 
+async function getTodoById(id: string): Promise<Todo> {
+  const { data, error } = await supabase
+    .from('todos')
+    .select()
+    .eq('id', id)
+    .single();
+
+  if (error) throw new Error('Failed to get todo by id');
+
+  const parsedData = TodoSchema.safeParse(data);
+  if (!parsedData.success) throw new Error('Failed to parse searched todo');
+
+  return parsedData.data;
+}
+
 async function createByContent(content: string): Promise<Todo> {
-  const newTodo = createTodo(content);
-  return newTodo;
+  const { data, error } = await supabase
+    .from('todos')
+    .insert({ content: content })
+    .select()
+    .single();
+
+  if (error) throw new Error('Failed to insert todo in database');
+
+  const parsedData = TodoSchema.parse(data);
+  return parsedData;
 }
 
 async function deleteById(id: string) {
-  const todos = readTodos();
+  const todo = await getTodoById(id);
 
-  const todo = todos.find((todo) => todo.id === id);
+  const { error } = await supabase
+    .from('todos')
+    .update({ deleted: true })
+    .eq('id', todo.id);
 
-  if (!todo) {
-    throw new HttpNotFoundError(`TODO with id ${id} not found`);
-  }
-
-  updateTodo(todo.id, {
-    deleted: true,
-  });
+  if (error) throw new Error('Failed to delete todo');
 
   return;
 }
 
 async function toggleDone(id: string): Promise<Todo> {
-  const todos = readTodos();
+  const todo = await getTodoById(id);
 
-  const todo = todos.find((todo) => todo.id === id);
+  const { data, error } = await supabase
+    .from('todos')
+    .update({ done: !todo.done })
+    .eq('id', todo.id)
+    .select()
+    .single();
 
-  if (!todo) {
-    throw new HttpNotFoundError(`TODO with id ${id} not found`);
-  }
+  if (error) throw new Error('Failed to toggle todo');
 
-  const todoById = updateTodo(todo.id, {
-    done: !todo.done,
-  });
-
-  return todoById;
+  const parsedData = TodoSchema.parse(data);
+  return parsedData;
 }
 
 export const todoRepository = {
