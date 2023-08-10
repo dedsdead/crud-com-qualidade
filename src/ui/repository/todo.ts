@@ -17,7 +17,7 @@ function get({
   limit,
 }: TodoRepositoryGetParams): Promise<TodoRepositoryGetOutput> {
   return fetch(
-    `https://crud-com-qualidade-lbq3gnl7h-dedsdead.vercel.app/api/todos?page=${page}&limit=${limit}`
+    `http://localhost:3000/api/todos?page=${page}&limit=${limit}`
   ).then(async (resp) => {
     const todosText = await resp.text();
     const responseParsed = parseTodosServer(JSON.parse(todosText));
@@ -73,18 +73,15 @@ function parseTodosServer(responseBody: unknown): {
 }
 
 async function create(content: string): Promise<Todo> {
-  return fetch(
-    'https://crud-com-qualidade-lbq3gnl7h-dedsdead.vercel.app/api/todos',
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        content,
-      }),
-    }
-  ).then(async (resp) => {
+  return fetch('http://localhost:3000/api/todos', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      content,
+    }),
+  }).then(async (resp) => {
     const todoResponse = await resp.json();
     const todoSchema = schema.object({
       todo: TodoSchema,
@@ -99,15 +96,12 @@ async function create(content: string): Promise<Todo> {
 }
 
 async function toggleDone(todoId: string): Promise<Todo> {
-  return fetch(
-    `https://crud-com-qualidade-lbq3gnl7h-dedsdead.vercel.app/api/todos/${todoId}/toggle-done`,
-    {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  ).then(async (resp) => {
+  return fetch(`http://localhost:3000/api/todos/${todoId}/toggle-done`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).then(async (resp) => {
     const todoResponse = await resp.json();
     const todoSchema = schema.object({
       todo: TodoSchema,
@@ -121,15 +115,12 @@ async function toggleDone(todoId: string): Promise<Todo> {
 }
 
 async function deleteById(todoId: string) {
-  return fetch(
-    `https://crud-com-qualidade-lbq3gnl7h-dedsdead.vercel.app/api/todos/${todoId}`,
-    {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  );
+  return fetch(`http://localhost:3000/api/todos/${todoId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
 }
 
 export const todoRepository = {
