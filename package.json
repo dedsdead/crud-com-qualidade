@@ -6,14 +6,14 @@
   "scripts": {
     "start:crud": "npx ts-node ./core/crud.ts",
     "dev:crud": "nodemon --ext ts,tsx --exec npm run start:crud",
-    "dev": "next dev",
+    "dev": "NEXT_MANUAL_SIG_HANDLE=true next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint \"./**/*.{jsx,jsx,ts,tsx}\"",
     "lint:fix": "npm run lint",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "test": "concurrently -g -s first -k \"npm run dev\" \"npm run cy:run\""
+    "test": "concurrently -k \"npm run dev\" \"npm run cy:run\""
   },
   "repository": {
     "type": "git",
