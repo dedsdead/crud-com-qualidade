@@ -30,7 +30,6 @@ async function get(req: NextApiRequest, res: NextApiResponse) {
     });
     return;
   }
-
   try {
     const serverOutput = await todoRepository.get({
       page,
